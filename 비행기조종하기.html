@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #back {
+            width: 1280px;
+            height: 640px;
+            background-image: url(../images/Airplane/game_bg.jpg);
+            margin: auto;
+            position: relative;  /* 자식요소가 포지션값이있으면 넣어준다 */
+            overflow: hidden;
+        }
+        #pic {
+            width: 100px;
+            height: 65px;
+            transition: .2s;
+        }
+    </style>
+    <script>
+        let pic; //전역변수 //프로그램이 끝날때까지 유지된다.
+        //비행기를 우측으로( left값 증가)
+        let n=150;
+        let h=0;
+        function next(){
+            n = n + 10; //10 누적
+            //문서내의 비행기..
+            console.log(n);
+            pic.style.left=n +"px";
+        }
+        function prev(){
+            n = n - 10; 
+            console.log(n);
+            pic.style.left=n +"px";
+        }
+        function down(){
+            h = h + 10;
+            console.log(h);
+            pic.style.top=h +"px";
+        }
+        function up(){
+            h = h - 10;
+            console.log(h);
+            pic.style.top=h +"px";
+        }
+        //문서가 로드되면, 비행기위치 지정하기
+        function init(){
+            pic= document.getElementById('pic');
+            pic.style.position= "absolute"; // 부모요소를 기준
+            pic.style.left= 150+"px"; //js는 ' + ' 연산자가 숫자랑 문자를 이어준다
+
+        }
+        //키보드를 이용하여, 방향키 조종
+        function move(){
+            console.log("지금 발행한 이벤트정보", event);
+            console.log("당신이 누른 키보드 아스키값은",event.keyCode);
+
+
+            if (event.keyCode==39){
+                next();
+                
+            }
+            if (event.keyCode==37){
+                prev();
+            }
+            if (event.keyCode==38){
+                up();
+            }
+            if (event.keyCode==40){
+                down();
+            }
+    
+        };
+    </script>
+</head>
+<body onload="init()" onkeydown="(move())">
+
+<div id="back">
+    <img id="pic" src="../images/Airplane/plane.png">
+    <table>
+        <tr>
+            <td></td>
+            <td><button onClick="up()">상</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><button onClick="prev()">좌</button></td>
+            <td><button onClick="down()">하</button></td>
+            <td><button onClick="next()">우</button></td>
+        </tr>
+
+    </table>   
+</div>
+
+
+
+
+
+
+    
+</body>
+</html>
